@@ -1,0 +1,21 @@
+{
+  "name": "node-proyect",
+  "version": "1.0.0",
+  "description": "One Node Proyect",
+  "main": "index.js",
+  "scripts": {
+    "callbacks": "node learning /arch/callbacks.js ",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Esgueva/node.git"
+  },
+  "keywords": [],
+  "author": "Rodrigo Esgueva",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Esgueva/node/issues"
+  },
+  "homepage": "https://github.com/Esgueva/node#readme"
+}
