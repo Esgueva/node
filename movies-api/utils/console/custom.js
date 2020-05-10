@@ -32,7 +32,7 @@ class CustomConsole {
   Success(msg) {
     console.log(
       '\x1b[32m%s\x1b[0m',
-      '[SUCCESS] - ' + +moment().format('D/MM/YY h:mm:ss a') + ' :: ' + msg,
+      '[SUCCESS] - ' + moment().format('D/MM/YY h:mm:ss a') + ' :: ' + msg,
       '\x1b[0m'
     );
   }

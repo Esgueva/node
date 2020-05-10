@@ -181,3 +181,9 @@ Eliminar - eliminar
 
 Mockaroo* es un servicio que nos permite crear datos simulados a partir de una 
 estructura, por ejemplo para generar la estructura de nuestra película
+
+Capa de servicios
+-----------------
+La arquitectura tradicional MVC se queda corta en aplicaciones modernas, por 
+eso necesitamos una arquitectura diferente cómo la Clean Arquitecture que tiene 
+una capa de servicios para manejar la lógica de negocio.
