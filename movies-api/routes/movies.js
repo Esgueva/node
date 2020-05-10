@@ -1,11 +1,13 @@
 const express = require('express');
 const MoviesServices = require('../services/movies');
+const ConsoleCustom = require('../utils/console/custom');
 
 function moviesAPI(app) {
   const router = express.Router();
   app.use('/api/movies', router);
 
   const moviesServices = new MoviesServices();
+  const logs = new ConsoleCustom();
 
   router.get('/', async (req, res, next) => {
     let { tags } = req.query;
@@ -15,8 +17,10 @@ function moviesAPI(app) {
         data: movies,
         message: 'Show All Movies'
       });
+      logs.Info('GET ALL');
     } catch (err) {
-      next(err);
+      logs.Error(err);
+      next();
     }
   });
 
@@ -28,8 +32,10 @@ function moviesAPI(app) {
         data: movie,
         message: 'Show Movie'
       });
+      logs.Info('GET ONE');
     } catch (err) {
-      next(err);
+      logs.Error(err);
+      next();
     }
   });
 
@@ -41,8 +47,10 @@ function moviesAPI(app) {
         data: createMovieId,
         message: 'Created Movie'
       });
+      logs.Info('POST');
     } catch (err) {
-      next(err);
+      logs.Error(err);
+      next();
     }
   });
 
@@ -58,8 +66,10 @@ function moviesAPI(app) {
         data: updatedMovieId,
         message: 'Updated Movie'
       });
+      logs.Info('UPDATE');
     } catch (err) {
-      next(err);
+      logs.Error(err);
+      next();
     }
   });
 
@@ -76,7 +86,7 @@ function moviesAPI(app) {
         message: 'Updated Movie'
       });
     } catch (err) {
-      next(err);
+      next();
     }
   });
 
@@ -88,8 +98,10 @@ function moviesAPI(app) {
         data: deleteMovie,
         message: 'Deleted Movie'
       });
+      logs.Info('DELETE');
     } catch (err) {
-      next(err);
+      logs.Error(err);
+      next();
     }
   });
 }
