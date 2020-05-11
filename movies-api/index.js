@@ -18,6 +18,9 @@ const {
 //Cors
 app.use(cors());
 
+//const corsOptions = { origin: 'http://localhost' };
+//app.use(cors(corsOptions));
+
 //Body Parser
 app.use(bodyParser.json());
 
@@ -41,4 +44,5 @@ app.use(errorHandler);
 //Server
 app.listen(config.port, () => {
   console.log(`Listening http://localhost:${config.port}`);
+  console.log('CORS-enabled web server');
 });
