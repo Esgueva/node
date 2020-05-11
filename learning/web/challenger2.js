@@ -1,17 +1,17 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const { config } = require('./config/index');
+const { config } = require("../../movies-api/config/index");
 
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   res.send(
     `<h1>Introduzca un año en la URL</h1> 
     <h2>Ejemplo http:localhost:${config.port}/2020</h2>`
   );
 });
 
-app.get('/:year', (req, res) => {
+app.get("/:year", (req, res) => {
   let year = req.params.year;
-  let contentHTML = '';
+  let contentHTML = "";
   isNaN(year)
     ? (contentHTML = `<h1>No ha introducido un número</h1>`)
     : (contentHTML = isLeapYear(year));
@@ -21,8 +21,8 @@ app.get('/:year', (req, res) => {
 function isLeapYear(year) {
   let msg = `El año ${year} `;
   (year % 4 == 0 && year % 100 != 0) || year % 400 == 0
-    ? (msg += 'es bisiesto')
-    : (msg += 'no es bisiesto');
+    ? (msg += "es bisiesto")
+    : (msg += "no es bisiesto");
   return `<h1>${msg}</h1>`;
 }
 
