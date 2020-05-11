@@ -9,7 +9,8 @@
     "test": "NODE_ENV=development && mocha --exit",
     "cover": "nyc npm run test",
     "report": "nyc report --reporter=html && open coverage",
-    "deb": "node --inspect index"
+    "deb": "node --inspect index",
+    "docker": "docker run -p 3000:3000 -d movies-api"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +18,7 @@
   "dependencies": {
     "@hapi/boom": "^9.1.0",
     "@hapi/joi": "^17.1.1",
+    "@now/node": "^1.6.1",
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
