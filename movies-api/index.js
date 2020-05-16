@@ -8,12 +8,15 @@ const compression = require('compression');
 
 const { config } = require('./config/index');
 const moviesAPI = require('./routes/movies');
-const notFoundHandler = require('./utils/middleware/notFoundHandler');
+const usermoviesAPI = require('./routes/userMovies');
+
 const {
   logErrors,
   wrapErrors,
   errorHandler
 } = require('./utils/middleware/errorHandler');
+
+const notFoundHandler = require('./utils/middleware/notFoundHandler');
 
 //Cors
 app.use(cors());
@@ -32,6 +35,7 @@ app.use(compression());
 
 //Routes API
 moviesAPI(app);
+usermoviesAPI(app);
 
 //Catch 404
 app.use(notFoundHandler);
