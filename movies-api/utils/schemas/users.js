@@ -10,8 +10,8 @@ const createUserShema = {
   email: joi
     .string()
     .email()
-    .require(),
-  password: joi.string().require(),
+    .required(),
+  password: joi.string().required(),
   isAdmin: joi.boolean()
 };
 
