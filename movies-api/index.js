@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 
 const { config } = require('./config/index');
+const authAPI = require('./routes/auth');
 const moviesAPI = require('./routes/movies');
 const usermoviesAPI = require('./routes/userMovies');
 
@@ -34,6 +35,7 @@ app.use(morgan('tiny'));
 app.use(compression());
 
 //Routes API
+authAPI(app);
 moviesAPI(app);
 usermoviesAPI(app);
 

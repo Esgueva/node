@@ -1,4 +1,5 @@
 const express = require('express');
+const passport = require('passport');
 
 const UserMoviesService = require('../services/userMovies');
 const validationHandler = require('../utils/middleware/validationHandler');
@@ -7,15 +8,19 @@ const { movieIdSchema } = require('../utils/schemas/movies');
 const { userIdSchema } = require('../utils/schemas/users');
 const { createUserMovieSchema } = require('../utils/schemas/userMovies');
 
+// JWT Stragetie
+require('../utils/auth/strategies/jwt');
+
 function userMoviesApi(app) {
   const router = express.Router();
-  app.user('api/user-movies', router);
+  app.use('api/user-movies', router);
 
-  const userMoviesService = UserMoviesService();
+  const userMoviesService = new UserMoviesService();
 
   router.get(
     '/',
-    validationHandler({ userId: userIdSchema }, query),
+    passport.authenticate('jwt', { session: false }),
+    validationHandler({ userId: userIdSchema }, 'query'),
     async (req, res, next) => {
       const { userId } = req.query;
       try {
@@ -32,6 +37,7 @@ function userMoviesApi(app) {
 
   router.post(
     '/',
+    passport.authenticate('jwt', { session: false }),
     validationHandler(createUserMovieSchema),
     async (req, res, next) => {
       const { body: userMovie } = req;
@@ -52,23 +58,26 @@ function userMoviesApi(app) {
 
   router.delete(
     '/:userMovieId',
-    validationHandler({ userMovieId: movieIdSchema }),
-    'params',
-    async (res, req, next) => {
-      const { userMovieId } = req.params;
-      try {
-        const deleteUserMovieId = await userMoviesService.deleteUserMovieId({
-          userMovieId
-        });
+    passport.authenticate('jwt', { session: false }),
+    validationHandler(
+      { userMovieId: movieIdSchema },
+      'params',
+      async (res, req, next) => {
+        const { userMovieId } = req.params;
+        try {
+          const deleteUserMovieId = await userMoviesService.deleteUserMovieId({
+            userMovieId
+          });
 
-        res.status(200).json({
-          data: deleteUserMovieId,
-          message: 'user movie deleted'
-        });
-      } catch (err) {
-        next(err);
+          res.status(200).json({
+            data: deleteUserMovieId,
+            message: 'user movie deleted'
+          });
+        } catch (err) {
+          next(err);
+        }
       }
-    }
+    )
   );
 }
 
